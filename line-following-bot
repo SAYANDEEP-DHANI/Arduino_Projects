@@ -1,0 +1,45 @@
+int a;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(5,OUTPUT);//RIGHT SPEED
+pinMode(7,OUTPUT);//RIGHT DIRECTION
+pinMode(6,OUTPUT);//LIFT SPEED
+pinMode(8,OUTPUT);//LEFT DIRECTION
+pinMode(10,INPUT);//IR SENSOR
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  a=digitalRead(10);
+ Serial.println(a);
+ while(1)
+ {
+   a=digitalRead(10);
+   Serial.println(a);
+   go(100,100,0,1);
+  if(a==0)
+  {
+     go(0,100,0,1);
+     delay(100);
+   go(0,0,0,1);
+   delay(100);
+  }
+  else if(a==1)
+  {
+    go(100,0,0,1);
+     delay(100);
+     go(0,0,0,1);
+     delay(100);
+    }
+ }
+}
+
+
+int go(int r, int l,int rd,int ld)
+{
+analogWrite(5,r);
+digitalWrite(7,rd);
+analogWrite(6,l);
+digitalWrite(8,ld);
+}
