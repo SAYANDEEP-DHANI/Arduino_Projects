@@ -1,0 +1,51 @@
+int a,d;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(5,OUTPUT);
+pinMode(6,OUTPUT);
+pinMode(7,OUTPUT);//buzz
+pinMode(11,OUTPUT);//TRIGER
+pinMode(12,INPUT);//ECO
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ Serial.println(d);  us_read();
+if(d<5)
+{
+  us_read();
+   Serial.println(d);
+  digitalWrite(6,HIGH);
+  digitalWrite(7,HIGH);
+  delay(100);
+  digitalWrite(6,LOW);
+  digitalWrite(7,HIGH);
+  delay(100);
+}else if(d>10)
+{
+  us_read();
+   Serial.println(d);
+  delay(100);
+  digitalWrite(5,HIGH);
+  digitalWrite(7,HIGH);
+  delay(100);
+  digitalWrite(5,LOW);
+  digitalWrite(7,HIGH);
+  }
+
+
+}
+int us_read()
+{
+digitalWrite(11,LOW);
+delay(100);
+digitalWrite(11,HIGH);
+delayMicroseconds(10);
+digitalWrite(11,LOW);
+a=pulseIn(12,HIGH);
+d=(a*0.017);
+}
+
+
+
